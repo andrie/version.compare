@@ -2,12 +2,10 @@ Package: version.compare
 Title: Allows you to run R code in different versions of R and compare results
 Version: 0.0-1
 Authors@R: "Andrie de Vries <apdevries@gmail.com> [aut, cre]"
+Date: 2014-11-03
 Description: Allows you to run R code in different versions of R and compare
     results
 License: GPL-2
 LazyData: true
 Depends:
     R (>= 3.0.0)
-Imports:
-    foreach,
-    devtools

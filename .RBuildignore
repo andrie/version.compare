@@ -1,2 +1,2 @@
-*.git
+.gitignore
 README.md
