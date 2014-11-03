@@ -3,6 +3,8 @@
 #' @param expr Expression
 #' @param rVersions Character vector containing path to Rscript in different installations of R
 #' @export
+#'
+#' @example \inst\examples\example_version.time.R
 version.time <- function(expr, rVersions){
   scriptfile <- tempfile(fileext = ".R")
   on.exit(unlink(scriptfile))
