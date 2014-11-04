@@ -1,8 +1,9 @@
 Package: version.compare
-Title: Allows you to run R code in different versions of R and compare results
-Version: 0.0-1
+Title: Compare the results of R code running in different installed versions of
+    R
+Version: 0.0-2
 Authors@R: "Andrie de Vries <apdevries@gmail.com> [aut, cre]"
-Date: 2014-11-03
+Date: 2014-11-04
 Description: Allows you to run R code in different versions of R and compare
     results
 License: GPL-2
