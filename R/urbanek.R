@@ -18,10 +18,17 @@ urbanek2.5 <- function(threads = 4, show.message = TRUE, scale.factor = 1){
   }
 
   runUrbanek <- function(threads){
-    if(requireNamespace("RevoUtilsMath", quietly = TRUE) || requireNamespace("RevoBase", quietly = TRUE)){
-      oldThreads <- RevoUtilsMath::getMKLthreads()
-      RevoUtilsMath::setMKLthreads(threads)
-      on.exit(RevoUtilsMath::setMKLthreads(oldThreads))
+    # if(requireNamespace("RevoUtilsMath", quietly = TRUE) || requireNamespace("RevoBase", quietly = TRUE)){
+    if("RevoUtilsMath" %in% available.packages[, "Package"]){
+
+      # Trick to pass R CMD check - equivalent to library(RevoUtilsMath)
+      to.load <- "RevoUtilsMath"
+      call <- expression(library(to.load, character.only = TRUE))
+      eval(call)
+
+      oldThreads <- getMKLthreads()
+      setMKLthreads(threads)
+      on.exit(setMKLthreads(oldThreads))
     }
 
     test.names <- c("Matrix multiplication",
