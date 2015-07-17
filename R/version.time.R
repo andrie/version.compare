@@ -20,7 +20,8 @@ runWithRscript <- function(rscriptPath, testscriptPath, message=TRUE){
     shQuote(testscriptPath)
   )
   if(message) message(rscriptPath)
-  time <- system.time({ result <- system(cmd) })
+  result <- NA
+  time <- system.time({ result <- system(cmd, intern = TRUE) })
   list(time = time, result = result)
 }
 
