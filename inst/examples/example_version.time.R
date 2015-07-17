@@ -8,15 +8,18 @@ rscript <- findRscript(version = rversion)
 
 # Compute vector mean in different R installations
 
-version.time({
+version.time(rscript, {
+  set.seed(1)
   foo <- rnorm(1e6)
   mean(foo)
-} , rscript)
+})
 
 
 # Compute matrix cross product in different R installations
 
-version.time({
+version.time(rscript, {
+  set.seed(42)
   m <- matrix(runif(100), nrow=10)
   crossprod(m)
-} , rscript)
+})
+
