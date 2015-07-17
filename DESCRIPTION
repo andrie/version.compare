@@ -9,4 +9,5 @@ Description: Allows you to run R code in different versions of R and compare
 License: GPL-2
 LazyData: true
 Depends:
-    R (>= 3.0.0)
+    R (>= 3.0.0),
+    MASS
