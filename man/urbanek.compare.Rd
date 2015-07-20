@@ -7,6 +7,8 @@
 urbanek.compare(rVersions, threads = 4, scale.factor = 1)
 }
 \arguments{
+\item{rVersions}{Character vector containing path to Rscript in different installations of R}
+
 \item{threads}{Number of Intel MKL threads to use if availalbe. Tests for the presence of the packages \code{RevoUtilsMath} or \code{RevoBase} and sets the number of threads using \code{RevoUtilsMath::setMKLthreads}}
 
 \item{scale.factor}{A numeric value that scales the size of the data up or down. The default value of 1 has data sizes that yields a runtime of ~2 seconds per test on an 8-core machine with the MKL available.  For quick and easy testing, reduce the \code{scale.factor} to less than 1. (The primary use case for low \code{scale.factor} is to reduce the unit testing time when testing the package itself on CRAN.) To scale out the test data, use \code{scale.factor} of greater than 1.}

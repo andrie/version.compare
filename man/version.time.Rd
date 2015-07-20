@@ -9,7 +9,9 @@ version.time(rVersions, expr, file)
 \arguments{
 \item{rVersions}{Character vector containing path to Rscript in different installations of R}
 
-\item{expr}{Expression}
+\item{expr}{Expression to evaluate}
+
+\item{file}{If specified, evaluates the code in the file, rather than \code{expr}}
 }
 \description{
 Run script in different versions of R and capture system time.
