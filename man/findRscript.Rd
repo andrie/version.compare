@@ -7,7 +7,7 @@
 findRscript(path, executable = "(Rscript$|Rscript.exe)", pattern, version)
 }
 \arguments{
-\item{path}{Character vector of search paths. Passed to \code{\link{list.files}}}
+\item{path}{Character vector of search paths. Passed to \code{\link{list.files}}. If not specified (the default) then the search path contains typical installation paths for different operating systems.}
 
 \item{executable}{Regular expression that defines the name of the Rscript executable. Defaults to a regular expression that finds \code{Rscript} on linux machines and \code{Rscript.exe} on Windows}
 

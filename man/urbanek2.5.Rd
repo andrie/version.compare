@@ -7,7 +7,7 @@
 urbanek2.5(threads = 4, show.message = TRUE, scale.factor = 1)
 }
 \arguments{
-\item{threads}{Number of Intel MKL threads to use if availalbe. Tests for the presence of the packages \code{RevoUtilsMath} or \code{RevoBase} and sets the number of threads using \code{\link[RevoUtilsMath]{setMKLthreads}}}
+\item{threads}{Number of Intel MKL threads to use if availalbe. Tests for the presence of the packages \code{RevoUtilsMath} or \code{RevoBase} and sets the number of threads using \code{RevoUtilsMath::setMKLthreads}}
 
 \item{show.message}{If TRUE, shows interim results as console messages}
 
