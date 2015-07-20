@@ -5,24 +5,35 @@
 #' @export
 #'
 #' @example \inst\examples\example_version.time.R
-version.time <- function(rVersions, expr){
+version.time <- function(rVersions, expr, file){
   match <- match.call()
   expr <- match$expr
 
-  scriptfile <- tempfile(fileext = ".R")
-  on.exit(unlink(scriptfile))
-
   # capture system.time of original expression and write results to tempfile
-  p1 <- "time <- system.time(result <- local("
-  p2 <- "))
-    tf <- tempfile(fileext = '.rds', tmpdir = dirname(tempdir()))
+  p1 <- "time <- system.time(result <- local({"
+  p2 <- "}))
+    tf <- normalizePath(tempfile(fileext = '.rds', tmpdir = dirname(tempdir())), mustWork = FALSE)
     saveRDS(result, file = tf)
     cat(tf)
   "
-  new.expr <- sprintf("%s%s%s", p1, paste(deparse(expr), collapse = "\n"), p2)
+  scriptfile <- tempfile(fileext = ".R")
+  on.exit(unlink(scriptfile))
+
+
+
+  if(!missing("file") && !is.null(file)){
+    tmp <- paste(readLines(tf), collapse = "\n")
+  } else {
+    tmp <- paste(deparse(expr), collapse = "\n")
+  }
+  new.expr <- sprintf("%s\n%s\n%s", p1, tmp, p2)
 
   # save new expression to file so it can be picked up by clean R session
   write(new.expr, file = scriptfile)
+
+  # cat(readLines(scriptfile), sep = "\n")
+
+
 
   # run the actual script in each R version
   res <- lapply(rVersions, runWithRscript, testscriptPath = scriptfile)
