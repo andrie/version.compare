@@ -1,0 +1,49 @@
+---
+title: "Run MKL benchmarks"
+author: "Andrie de Vries"
+date: "20 July 2015"
+output: html_document
+---
+
+Load the `version.compare` package.
+
+```{r load-library}
+library("version.compare")
+```
+
+Find installed versions of R
+
+```{r r-version}
+r <- findRscript(version = "3.2.1.*x64")
+rNames <- gsub(".*?/(R.*?/R-.+?)/.*", "\\1", normalizePath(r, winslash = "/"))
+
+r
+rNames
+```
+
+Run the tests
+
+```{r run-tests}
+
+test.results <- urbanek.compare(rVersions = r, scale.factor = 0.1)
+
+print(test.results)
+```
+
+
+Plot
+
+```{r plot-results, echo = FALSE}
+time <- sapply(test.results, function(x)x[["time"]][[3]])
+names(time) <- rNames
+
+library(ggplot2)
+qplot(x = rNames, y = time, geom = "bar", stat = "identity", fill = I("orange")) + 
+  geom_text(label = round(time, 2)) +
+  theme_bw(16) +
+  xlab(NULL) +
+  ylab("Total time (seconds)") + 
+  ggtitle("Total system test elapsed time") +
+  coord_flip()
+
+```
