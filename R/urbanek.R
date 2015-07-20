@@ -108,6 +108,7 @@ urbanek2.5 <- function(threads = 4, show.message = TRUE, scale.factor = 1){
 
     elapsed.time
   }
+  if(!"package:RevoUtilsMath" %in% search()) threads <- threads[1]
   ret <- lapply(threads, runUrbanek)
   ret <- do.call(cbind, ret)
   colnames(ret) <- paste0("Threads:", threads)
