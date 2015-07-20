@@ -3,7 +3,7 @@
 
 #' Returns the system time for a modified version of the Urbanek benchmarks.
 #'
-#' @param threads Number of Intel MKL threads to use if availalbe. Tests for the presence of the packages \code{RevoUtilsMath} or \code{RevoBase} and sets the number of threads using \code{\link[RevoUtilsMath]{setMKLthreads}}
+#' @param threads Number of Intel MKL threads to use if availalbe. Tests for the presence of the packages \code{RevoUtilsMath} or \code{RevoBase} and sets the number of threads using \code{RevoUtilsMath::setMKLthreads}
 #' @param show.message If TRUE, shows interim results as console messages
 #' @param scale.factor A numeric value that scales the size of the data up or down. The default value of 1 has data sizes that yields a runtime of ~2 seconds per test on an 8-core machine with the MKL available.  For quick and easy testing, reduce the \code{scale.factor} to less than 1. (The primary use case for low \code{scale.factor} is to reduce the unit testing time when testing the package itself on CRAN.) To scale out the test data, use \code{scale.factor} of greater than 1.
 #'
@@ -17,14 +17,17 @@ urbanek2.5 <- function(threads = 4, show.message = TRUE, scale.factor = 1){
     round(x * sqrt(scale.factor))
   }
 
+
+
   runUrbanek <- function(threads){
     # if(requireNamespace("RevoUtilsMath", quietly = TRUE) || requireNamespace("RevoBase", quietly = TRUE)){
-    if("RevoUtilsMath" %in% available.packages[, "Package"]){
+    # if("RevoUtilsMath" %in% available.packages()[, "Package"]){
+    if("package:RevoUtilsMath" %in% search()){
 
-      # Trick to pass R CMD check - equivalent to library(RevoUtilsMath)
-      to.load <- "RevoUtilsMath"
-      call <- expression(library(to.load, character.only = TRUE))
-      eval(call)
+#       # Trick to pass R CMD check - equivalent to library(RevoUtilsMath)
+#       to.load <- "RevoUtilsMath"
+#       call <- expression(library(to.load, character.only = TRUE))
+#       eval(call)
 
       oldThreads <- getMKLthreads()
       setMKLthreads(threads)
@@ -34,7 +37,7 @@ urbanek2.5 <- function(threads = 4, show.message = TRUE, scale.factor = 1){
     test.names <- c("Matrix multiplication",
                     "Cholesky factorization",
                     "QR decomposition",
-                    "Singular Value decomposition",
+                    "Singular value decomposition",
                     "Principal component analysis",
                     "Linear discriminant analysis")
     elapsed.time <- rep(NA, length(test.names))
@@ -50,6 +53,10 @@ urbanek2.5 <- function(threads = 4, show.message = TRUE, scale.factor = 1){
         message(msg)
       }
     }
+
+    if(show.message) message("\nThreads:", threads)
+
+
     # Initialization
 
     set.seed (1)
@@ -101,7 +108,11 @@ urbanek2.5 <- function(threads = 4, show.message = TRUE, scale.factor = 1){
 
     elapsed.time
   }
-  lapply(threads, runUrbanek)
+  ret <- lapply(threads, runUrbanek)
+  ret <- do.call(cbind, ret)
+  colnames(ret) <- paste0("Threads:", threads)
+  ret
+
 }
 
 
