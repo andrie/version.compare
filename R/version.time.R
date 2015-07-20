@@ -10,8 +10,8 @@ version.time <- function(rVersions, expr, file){
   expr <- match$expr
 
   # capture system.time of original expression and write results to tempfile
-  p1 <- "time <- system.time(result <- local({"
-  p2 <- "}))
+  p1 <- "result <- local({"
+  p2 <- "})
     tf <- normalizePath(tempfile(fileext = '.rds', tmpdir = dirname(tempdir())), mustWork = FALSE)
     saveRDS(result, file = tf)
     cat(tf)
@@ -22,7 +22,7 @@ version.time <- function(rVersions, expr, file){
 
 
   if(!missing("file") && !is.null(file)){
-    tmp <- paste(readLines(tf), collapse = "\n")
+    tmp <- paste(readLines(file), collapse = "\n")
   } else {
     tmp <- paste(deparse(expr), collapse = "\n")
   }
