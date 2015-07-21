@@ -5,6 +5,8 @@ date: "20 July 2015"
 output: html_document
 ---
 
+# Running the tests
+
 Load the `version.compare` package.
 
 ```{r load-library}
@@ -15,9 +17,9 @@ Find installed versions of R
 
 ```{r r-version}
 r <- findRscript(version = "3.2.1.*x64")
-rNames <- gsub(".*?/(R.*?/R-.+?)/.*", "\\1", normalizePath(r, winslash = "/"))
-
 r
+
+rNames <- gsub(".*?/(R.*?/R-.+?)/.*", "\\1", normalizePath(r, winslash = "/"))
 rNames
 ```
 
@@ -26,15 +28,30 @@ Run the tests
 ```{r run-tests}
 
 test.results <- urbanek.compare(rVersions = r, scale.factor = 0.1)
-
-print(test.results)
 ```
 
 
-Plot
+## Compare results
+
+Results
+
+```{r compare-results}
+tm <- urbanekCombine(test.results$results)
+tm
+```
+
+Performance speed-up
+
+```{r}
+urbanekPerformance(test.results$results)
+```
+
+## Plot
+
+Compare total elapsed time
 
 ```{r plot-results, echo = FALSE}
-time <- sapply(test.results, function(x)x[["time"]][[3]])
+time <- sapply(test.results$time, function(x)x[3])
 names(time) <- rNames
 
 library(ggplot2)
