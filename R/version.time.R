@@ -49,7 +49,7 @@ version.time <- function(rVersions, expr, file){
 
   # retrieve results stored in tempfiles
   on.exit(unlink(result.tempfiles))
-  mres[["version.results"]] <- lapply(result.tempfiles, readRDS)
+  mres[["results"]] <- lapply(result.tempfiles, readRDS)
 
   mres
 }
