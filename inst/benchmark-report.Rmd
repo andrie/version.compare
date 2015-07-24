@@ -7,43 +7,28 @@ output: html_document
 
 # Running the tests
 
-Load the `version.compare` package.
+The package allows you to run benchmark tests on several different installations of R on the same machine
 
-```{r load-library}
+```{r init, echo=FALSE}
 library("version.compare")
-```
-
-Find installed versions of R
-
-```{r r-version}
+library("knitr")
 r <- findRscript(version = "3.2.1.*x64")
-r
-
-rNames <- gsub(".*?/(R.*?/R-.+?)/.*", "\\1", normalizePath(r, winslash = "/"))
-rNames
-```
-
-Run the tests
-
-```{r run-tests}
-
-test.results <- urbanek.compare(rVersions = r, scale.factor = 0.1)
+test.results <- RevoMultiBenchmark(rVersions = r, threads = c(1, 4), scale.factor = 0.25)
 ```
 
 
-## Compare results
+# Compare results
 
-Results
+## Elapsed time
 
-```{r compare-results}
-tm <- urbanekCombine(test.results$results)
-tm
+```{r compare-results, echo=FALSE}
+kable(test.results)
 ```
 
-Performance speed-up
+## Performance speed-up
 
-```{r}
-urbanekPerformance(test.results$results)
+```{r performance-speed-up, echo=FALSE}
+kable(urbanekPerformance(test.results))
 ```
 
 ## Plot
@@ -51,16 +36,18 @@ urbanekPerformance(test.results$results)
 Compare total elapsed time
 
 ```{r plot-results, echo = FALSE}
-time <- sapply(test.results$time, function(x)x[3])
-names(time) <- rNames
+# time <- sapply(test.results$time, function(x)x[3])
+# names(time) <- rNames
+# 
+# library(ggplot2)
+# qplot(x = rNames, y = time, geom = "bar", stat = "identity", fill = I("orange")) + 
+#   geom_text(label = round(time, 2)) +
+#   theme_bw(16) +
+#   xlab(NULL) +
+#   ylab("Total time (seconds)") + 
+#   ggtitle("Total system test elapsed time") +
+#   coord_flip()
 
-library(ggplot2)
-qplot(x = rNames, y = time, geom = "bar", stat = "identity", fill = I("orange")) + 
-  geom_text(label = round(time, 2)) +
-  theme_bw(16) +
-  xlab(NULL) +
-  ylab("Total time (seconds)") + 
-  ggtitle("Total system test elapsed time") +
-  coord_flip()
+plot(test.results)
 
 ```
