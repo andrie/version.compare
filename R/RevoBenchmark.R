@@ -8,8 +8,8 @@
 #' @param scale.factor A numeric value that scales the size of the data up or down. The default value of 1 has data sizes that yields a runtime of ~2 seconds per test on an 8-core machine with the MKL available.  For quick and easy testing, reduce the \code{scale.factor} to less than 1. (The primary use case for low \code{scale.factor} is to reduce the unit testing time when testing the package itself on CRAN.) To scale out the test data, use \code{scale.factor} of greater than 1.
 #'
 #' @export
-#' @import MASS
-urbanek2.5 <- function(threads = 4, show.message = TRUE, scale.factor = 1){
+#' @importFrom MASS lda
+RevoBenchmark <- function(threads = 4, show.message = TRUE, scale.factor = 1){
 
   getMKLthreads <- setMKLthreads <- NULL # Trick to pass R CMD check
 
@@ -23,12 +23,6 @@ urbanek2.5 <- function(threads = 4, show.message = TRUE, scale.factor = 1){
     # if(requireNamespace("RevoUtilsMath", quietly = TRUE) || requireNamespace("RevoBase", quietly = TRUE)){
     # if("RevoUtilsMath" %in% available.packages()[, "Package"]){
     if("package:RevoUtilsMath" %in% search()){
-
-#       # Trick to pass R CMD check - equivalent to library(RevoUtilsMath)
-#       to.load <- "RevoUtilsMath"
-#       call <- expression(library(to.load, character.only = TRUE))
-#       eval(call)
-
       oldThreads <- getMKLthreads()
       setMKLthreads(threads)
       on.exit(setMKLthreads(oldThreads))
@@ -111,9 +105,25 @@ urbanek2.5 <- function(threads = 4, show.message = TRUE, scale.factor = 1){
   if(!"package:RevoUtilsMath" %in% search()) threads <- threads[1]
   ret <- lapply(threads, runUrbanek)
   ret <- do.call(cbind, ret)
-  colnames(ret) <- paste0("Threads:", threads)
+  rVersion <- if(exists("Revo.version")) "RRO" else "R"
+  rVersionList <- if(exists("Revo.version")) Revo.version else R.version
+  rVersion <- sprintf("%s-%s.%s", rVersion, rVersionList$major, rVersionList$minor)
+  colnames(ret) <- sprintf("%s (%s thread%s)", rVersion, threads, ifelse(threads > 1, "s", ""))
+  class(ret) <- "RevoBenchmark"
+  Revo.version <- NULL # trick to pass R CMD check
+  attr(ret, "R.version") <- list(R.version = R.version,
+                                 Revo.version = if(exists("Revo.version")) Revo.version else NA
+  )
   ret
 
 }
+
+
+print.RevoBenchmark <- function(x, digits = 2, ...){
+  attr(x, "R.version") <- NULL
+  x <- unclass(x)
+  NextMethod(x, digits = digits)
+}
+
 
 

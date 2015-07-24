@@ -1,13 +1,16 @@
 Package: version.compare
 Title: Compares the results of R code running in different installed versions of
     R
-Version: 0.0-4
+Version: 0.0-5
 Authors@R: "Andrie de Vries <apdevries@gmail.com> [aut, cre]"
-Date: 2015-07-20
+Date: 2015-07-24
 Description: Allows you to run R code in different versions of R and compare
     results.
 License: GPL-2
 LazyData: true
 Depends:
     R (>= 3.0.0),
-    MASS
+Imports:
+    MASS,
+    ggplot2,
+    reshape2
