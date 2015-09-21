@@ -12,14 +12,14 @@ The package allows you to run benchmark tests on several different installations
 ```{r init, echo=FALSE}
 library("version.compare")
 library("knitr")
-r <- findRscript(version = "3.2.1.*x64")
-test.results <- RevoMultiBenchmark(rVersions = r, threads = c(1, 4), scale.factor = 0.25)
+r <- findRscript(version = "3.2.2.*x64")
+test.results <- RevoMultiBenchmark(rVersions = r, threads = c(1, 4), scale.factor = 0.1)
 ```
 
 
 # Compare results
 
-## Elapsed time
+## Elapsed time (seconds)
 
 ```{r compare-results, echo=FALSE}
 kable(test.results)
@@ -28,7 +28,7 @@ kable(test.results)
 ## Performance speed-up
 
 ```{r performance-speed-up, echo=FALSE}
-kable(urbanekPerformance(test.results))
+kable(urbanekPerformance(test.results), digits = 2)
 ```
 
 ## Plot
