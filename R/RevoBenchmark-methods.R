@@ -43,6 +43,6 @@ plot.RevoBenchmark <- function(x, ...){
     xlab(NULL) +
     ylab(NULL) +
     ggtitle("Elapsed time in seconds") +
-    scale_fill_discrete("R version") +
+    scale_fill_brewer("R version") +
     theme_bw(16)
 }
