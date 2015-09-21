@@ -1,7 +1,7 @@
 ---
 title: "Run MKL benchmarks"
 author: "Andrie de Vries"
-date: "20 July 2015"
+date: "21 September 2015"
 output: html_document
 ---
 
@@ -12,8 +12,10 @@ The package allows you to run benchmark tests on several different installations
 ```{r init, echo=FALSE}
 library("version.compare")
 library("knitr")
+```
+```{r benchmark, echo=FALSE, cache=TRUE}
 r <- findRscript(version = "3.2.2.*x64")
-test.results <- RevoMultiBenchmark(rVersions = r, threads = c(1, 4), scale.factor = 0.1)
+test.results <- RevoMultiBenchmark(rVersions = r, threads = c(1, 4), scale.factor = 1)
 ```
 
 
@@ -35,19 +37,6 @@ kable(urbanekPerformance(test.results), digits = 2)
 
 Compare total elapsed time
 
-```{r plot-results, echo = FALSE}
-# time <- sapply(test.results$time, function(x)x[3])
-# names(time) <- rNames
-# 
-# library(ggplot2)
-# qplot(x = rNames, y = time, geom = "bar", stat = "identity", fill = I("orange")) + 
-#   geom_text(label = round(time, 2)) +
-#   theme_bw(16) +
-#   xlab(NULL) +
-#   ylab("Total time (seconds)") + 
-#   ggtitle("Total system test elapsed time") +
-#   coord_flip()
-
-plot(test.results)
-
+```{r plot-results, echo = FALSE, fig.width=6, fig.height=3, out.width="1600px"}
+plot(test.results, theme_size=10)
 ```
