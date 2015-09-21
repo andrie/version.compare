@@ -34,7 +34,7 @@ urbanekPerformance <- function(x){
 #' @import ggplot2
 #' @importFrom reshape2 melt
 #' @export
-plot.RevoBenchmark <- function(x, ...){
+plot.RevoBenchmark <- function(x, theme_size=16, ...){
   dat <- to.data.frame(x)
   mdat <- reshape2::melt(dat, id.var = "test")
   ggplot2::ggplot(mdat, aes_string(x = "test", y = "value", fill = "variable")) +
@@ -44,5 +44,5 @@ plot.RevoBenchmark <- function(x, ...){
     ylab(NULL) +
     ggtitle("Elapsed time in seconds") +
     scale_fill_brewer("R version") +
-    theme_bw(16)
+    theme_bw(theme_size)
 }
