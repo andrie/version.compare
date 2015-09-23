@@ -13,7 +13,7 @@ The package allows you to run benchmark tests on several different installations
 library("version.compare")
 library("knitr")
 ```
-```{r benchmark, echo=FALSE, cache=TRUE}
+```{r benchmark, echo=FALSE}
 r <- findRscript(version = "3.2.2.*x64")
 test.results <- RevoMultiBenchmark(rVersions = r, threads = c(1, 4), scale.factor = 1)
 ```
