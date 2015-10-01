@@ -1,12 +1,16 @@
 Package: version.compare
-Title: Compares the results of R code running in different installed versions of
-    R
+Title: Compares the Results of R Code Running in Different Installed Versions of
+    R. In addition, provides an easy mechanism to run a modified version of the
+    Urbanek benchmark tests.
 Version: 0.0-7
 Authors@R: "Andrie de Vries <adevries@microsoft.com> [aut, cre]"
-Date: 2015-09-21
+Date: 2015-10-01
 Description: Allows you to run R code in different versions of R and compare
     results.
-License: GPL-2
+License: MIT
+Copyright: Revolution Analytics
+URL: http://www.github.com/andrie/version.compare
+BugReports: http://www.github.com/andrie/version.compare/issues
 LazyData: true
 Depends:
     R (>= 3.0.0),
@@ -15,5 +19,6 @@ Imports:
     ggplot2,
     reshape2
 Suggests:
-    testthat
+    testthat,
+    knitr
 VignetteEngine: knitr
