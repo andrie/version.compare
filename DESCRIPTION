@@ -14,4 +14,6 @@ Imports:
     MASS,
     ggplot2,
     reshape2
+Suggests:
+    testthat
 VignetteEngine: knitr
