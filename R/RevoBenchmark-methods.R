@@ -48,10 +48,11 @@ urbanekPerformance <- function(x){
 
 
 
-#' Create plot of urbanek test results.
+#' Create plot of RevoBenchmark results.
 #'
 #' @inheritParams urbanekPerformance
 #' @param ... Not used
+#' @param theme_size Passed to \code{\link[ggplot2]{theme_bw}}.
 #'
 #' @import ggplot2
 #' @importFrom reshape2 melt

@@ -2,16 +2,18 @@
 % Please edit documentation in R/RevoBenchmark-methods.R
 \name{plot.RevoBenchmark}
 \alias{plot.RevoBenchmark}
-\title{Create plot of urbanek test results.}
+\title{Create plot of RevoBenchmark results.}
 \usage{
 \method{plot}{RevoBenchmark}(x, theme_size = 16, ...)
 }
 \arguments{
 \item{x}{RevoBenchmark object}
 
+\item{theme_size}{Passed to \code{\link[ggplot2]{theme_bw}}.}
+
 \item{...}{Not used}
 }
 \description{
-Create plot of urbanek test results.
+Create plot of RevoBenchmark results.
 }
 
