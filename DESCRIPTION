@@ -21,4 +21,4 @@ Imports:
 Suggests:
     testthat,
     knitr
-VignetteEngine: knitr
+VignetteBuilder: knitr
