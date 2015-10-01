@@ -4,7 +4,7 @@
 \alias{plot.RevoBenchmark}
 \title{Create plot of urbanek test results.}
 \usage{
-\method{plot}{RevoBenchmark}(x, ...)
+\method{plot}{RevoBenchmark}(x, theme_size = 16, ...)
 }
 \arguments{
 \item{x}{RevoBenchmark object}

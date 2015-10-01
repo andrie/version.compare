@@ -7,8 +7,9 @@
 #' @param show.message If TRUE, shows interim results as console messages
 #' @param scale.factor A numeric value that scales the size of the data up or down. The default value of 1 has data sizes that yields a runtime of ~2 seconds per test on an 8-core machine with the MKL available.  For quick and easy testing, reduce the \code{scale.factor} to less than 1. (The primary use case for low \code{scale.factor} is to reduce the unit testing time when testing the package itself on CRAN.) To scale out the test data, use \code{scale.factor} of greater than 1.
 #'
-#' @export
 #' @importFrom MASS lda
+#' @export
+#' @seealso plot.RevoBenchmark
 RevoBenchmark <- function(threads = 4, show.message = TRUE, scale.factor = 1){
 
   getMKLthreads <- setMKLthreads <- NULL # Trick to pass R CMD check
@@ -109,7 +110,7 @@ RevoBenchmark <- function(threads = 4, show.message = TRUE, scale.factor = 1){
   rVersionList <- if(exists("Revo.version")) Revo.version else R.version
   rVersion <- sprintf("%s-%s.%s", rVersion, rVersionList$major, rVersionList$minor)
   colnames(ret) <- sprintf("%s (%s thread%s)", rVersion, threads, ifelse(threads > 1, "s", ""))
-  class(ret) <- "RevoBenchmark"
+  class(ret) <- c("RevoBenchmark", "matrix")
   Revo.version <- NULL # trick to pass R CMD check
   attr(ret, "R.version") <- list(R.version = R.version,
                                  Revo.version = if(exists("Revo.version")) Revo.version else NA

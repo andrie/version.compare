@@ -16,4 +16,7 @@ RevoBenchmark(threads = 4, show.message = TRUE, scale.factor = 1)
 \description{
 Returns the system time for a modified version of the Urbanek benchmarks.
 }
+\seealso{
+plot.RevoBenchmark
+}
 
