@@ -7,7 +7,7 @@ Authors@R: "Andrie de Vries <adevries@microsoft.com> [aut, cre]"
 Date: 2015-10-01
 Description: Allows you to run R code in different versions of R and compare
     results.
-License: MIT
+License: MIT + file LICENSE
 Copyright: Revolution Analytics
 URL: http://www.github.com/andrie/version.compare
 BugReports: http://www.github.com/andrie/version.compare/issues
