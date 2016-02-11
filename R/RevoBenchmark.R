@@ -128,7 +128,14 @@ RevoBenchmark <- function(threads = 4, show.message = TRUE, scale.factor = 1){
   if(!"package:RevoUtilsMath" %in% search()) threads <- threads[1]
   ret <- lapply(threads, runUrbanek)
   ret <- do.call(cbind, ret)
-  rVersion <- if(exists("Revo.version")) "RRO" else "R"
+
+  rVersion <- if(exists("Revo.version")) {
+    revo <- with(Revo.version, paste(major, minor, sep = "."))
+    if(compareVersion(revo, "3.2.3") >= 0) "MRO" else "RRO"
+  } else {
+    "R"
+  }
+
   rVersionList <- if(exists("Revo.version")) Revo.version else R.version
   rVersion <- sprintf("%s-%s.%s", rVersion, rVersionList$major, rVersionList$minor)
   colnames(ret) <- sprintf("%s (%s thread%s)", rVersion, threads, ifelse(threads > 1, "s", ""))

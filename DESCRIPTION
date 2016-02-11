@@ -3,10 +3,10 @@ Title: Compares the Results of R Code Running in Different Installed Versions of
     R.
 Version: 0.1.0
 Authors@R: "Andrie de Vries <adevries@microsoft.com> [aut, cre]"
-Date: 2015-10-01
+Date: 2016-02-11
 Description: Allows you to run R code in different versions of R and compare
-    results. In addition, provides an easy mechanism to run a modified version of the
-    Urbanek benchmark tests.
+    results. In addition, provides an easy mechanism to run a modified version of
+    the Urbanek benchmark tests.
 License: MIT + file LICENSE
 Copyright: Revolution Analytics
 URL: http://www.github.com/andrie/version.compare
@@ -22,3 +22,4 @@ Suggests:
     testthat,
     knitr
 VignetteBuilder: knitr
+RoxygenNote: 5.0.1

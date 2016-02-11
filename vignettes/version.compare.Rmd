@@ -11,17 +11,19 @@ vignette: >
 
 # Running the tests
 
-The package allows you to run benchmark tests on several different installations of R on the same machine.
-
-This vignette scales the test sets down to 10% of standard size, to speed up the process for sake of illustration. For a full-scale test, adjust the tests by setting `scale.factor = 1`.
-
 ```{r init, include=FALSE}
 library("version.compare")
 library("knitr")
+scale.factor <- 0.05
 ```
+
+The package allows you to run benchmark tests on several different installations of R on the same machine.
+
+This vignette scales the test sets down to `r sprintf("%1.0f%%", 100*scale.factor)` of standard size, to speed up the process for sake of illustration. For a full-scale test, adjust the tests by setting `scale.factor = 1`.
+
 ```{r benchmark, echo=FALSE}
-r <- findRscript(version = "3.2.2.*x64")
-test.results <- RevoMultiBenchmark(rVersions = r, threads = c(1, 4), scale.factor = 0.1)
+r <- findRscript(version = "3.2.3.*x64")
+test.results <- RevoMultiBenchmark(rVersions = r, threads = c(1, 4), scale.factor = scale.factor)
 ```
 
 
@@ -43,6 +45,6 @@ kable(urbanekPerformance(test.results), digits = 2)
 
 Compare total elapsed time
 
-```{r plot-results, echo = FALSE, fig.width=6, fig.height=3, out.width="800px"}
+```{r plot-results, echo = FALSE, fig.width=6, fig.height=3, out.width="800px", dpi=600}
 plot(test.results, theme_size=10)
 ```

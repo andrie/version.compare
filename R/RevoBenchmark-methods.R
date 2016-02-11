@@ -23,6 +23,7 @@
 # Combines results from Urbanek tests
 urbanekCombine <- function(x){
   z <- do.call(cbind, x)
+  z <- z[, order(colSums(z), decreasing = TRUE)]
   class(z) <- c("RevoBenchmark", "matrix")
   z
 }
