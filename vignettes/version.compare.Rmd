@@ -33,20 +33,19 @@ test.results <- RevoMultiBenchmark(rVersions = r, threads = c(1, 4), scale.facto
 
 ## Elapsed time (seconds)
 
-```{r compare-results, echo=FALSE}
-kable(test.results)
-```
-
-## Performance speed-up
-
-```{r performance-speed-up, echo=FALSE}
-kable(urbanekPerformance(test.results), digits = 2)
-```
-
-## Plot
-
 Compare total elapsed time
 
-```{r plot-results, echo = FALSE, fig.width=6, fig.height=3, out.width="800px", dpi=600}
-plot(test.results, theme_size=10)
+```{r compare-results, echo = FALSE, fig.width=6, fig.height=3, out.width="800px", dpi=600}
+kable(test.results)
+plot(test.results, theme_size=8)
 ```
+
+## Relative performance
+
+Compare relative performance
+
+```{r performance-speed-up, echo = FALSE, fig.width=6, fig.height=3, out.width="800px", dpi=600}
+kable(urbanekPerformance(test.results), digits = 2)
+plot(urbanekPerformance(test.results), theme_size=10, main = "Relative Performance")
+```
+
