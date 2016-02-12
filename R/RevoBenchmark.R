@@ -131,14 +131,14 @@ RevoBenchmark <- function(threads = 4, show.message = TRUE, scale.factor = 1){
 
   rVersion <- if(exists("Revo.version")) {
     revo <- with(Revo.version, paste(major, minor, sep = "."))
-    if(compareVersion(revo, "3.2.3") >= 0) "MRO" else "RRO"
+    if(compareVersion(revo, "3.2.3") >= 0) "Microsoft R Open" else "RRO"
   } else {
     "R"
   }
 
   rVersionList <- if(exists("Revo.version")) Revo.version else R.version
   rVersion <- sprintf("%s-%s.%s", rVersion, rVersionList$major, rVersionList$minor)
-  colnames(ret) <- sprintf("%s (%s thread%s)", rVersion, threads, ifelse(threads > 1, "s", ""))
+  colnames(ret) <- sprintf("%s\ (%s thread%s)", rVersion, threads, ifelse(threads > 1, "s", ""))
   class(ret) <- c("RevoBenchmark", "matrix")
   Revo.version <- NULL # trick to pass R CMD check
   attr(ret, "R.version") <- list(R.version = R.version,
