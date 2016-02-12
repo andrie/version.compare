@@ -42,7 +42,8 @@ to.data.frame <- function(x){
 #' @export
 urbanekPerformance <- function(x){
   # if(!is.data.frame(x)) x <- urbanekCombine(x)
-  1 / (x / x[, 1]) - 1
+  # 1 / (x / x[, 1]) - 1
+  1 / (x / x[, 1])
 
 }
 
@@ -58,15 +59,32 @@ urbanekPerformance <- function(x){
 #' @import ggplot2
 #' @importFrom reshape2 melt
 #' @export
-plot.RevoBenchmark <- function(x, theme_size=16, ...){
+plot.RevoBenchmark <- function(x, theme_size=16, main = "Elapsed time in seconds", ...){
   dat <- to.data.frame(x)
+  minmax <- data.frame(
+    test = dat[, "test"],
+    min = apply(dat[, -1], 1, min),
+    max = apply(dat[, -1], 1, max)
+  )
+  # browser()
   mdat <- reshape2::melt(dat, id.var = "test")
-  ggplot2::ggplot(mdat, aes_string(x = "test", y = "value", fill = "variable")) +
-    geom_bar(stat = "identity", position = "dodge") +
+  ggplot2::ggplot(mdat, aes_string(x = "test")) +
+    geom_linerange(data = minmax,
+                   aes_string(ymin = "min", ymax = "max")
+    ) +
+    geom_crossbar(data = mdat,
+                  aes_string(y = "value", ymin = "value", ymax = "value", col = "variable"),
+                  size = 0.3
+    ) +
+    geom_point(data = mdat,
+               aes_string(y = "value", col = "variable"),
+               stat = "identity",
+               size = 3
+    ) +
     coord_flip() +
     xlab(NULL) +
     ylab(NULL) +
-    ggtitle("Elapsed time in seconds") +
-    scale_fill_brewer("R version") +
+    ggtitle(main) +
+    scale_color_discrete("R version") +
     theme_bw(theme_size)
 }
