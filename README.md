@@ -56,3 +56,7 @@ version.time({
   crossprod(m)
 } , rscript)
 ```
+
+# View the vignette
+
+You can see the package vignette at https://htmlpreview.github.io/?https://github.com/andrie/version.compare/blob/master/inst/doc/version.compare.html
