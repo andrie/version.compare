@@ -4,7 +4,8 @@
 \alias{plot.RevoBenchmark}
 \title{Create plot of RevoBenchmark results.}
 \usage{
-\method{plot}{RevoBenchmark}(x, theme_size = 16, ...)
+\method{plot}{RevoBenchmark}(x, theme_size = 16,
+  main = "Elapsed time in seconds", ...)
 }
 \arguments{
 \item{x}{RevoBenchmark object}
