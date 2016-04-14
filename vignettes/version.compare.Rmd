@@ -18,7 +18,7 @@ The benchmarks are an adaptation of [Simon Urbanek's benchmarks](http://r.resear
 ```{r}
 library("version.compare")
 library("knitr")
-scale.factor <- 0.05
+scale.factor <- 1.0
 ```
 
 This vignette scales the test sets down to `r sprintf("%1.0f%%", 100*scale.factor)` of standard size, to speed up the process for sake of illustration. For a full-scale test, adjust the tests by setting `scale.factor <- 1`.
