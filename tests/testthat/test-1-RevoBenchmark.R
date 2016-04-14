@@ -3,7 +3,7 @@ context("RevoBenchmark")
 
 describe("Activates MKL if it exists",{
   test_that("RevoBencmark takes single threads argument",{
-    it("stops if missing snapshotDate", {
+    it("tests for correct class", {
       p1 <- RevoBenchmark(threads = 1, scale.factor = 0.05)
       p2 <- RevoBenchmark(threads = 2, scale.factor = 0.05)
 
@@ -15,7 +15,7 @@ describe("Activates MKL if it exists",{
     })
   })
   test_that("RevoBencmark takes multiple threads arguments",{
-    it("stops if missing snapshotDate", {
+    it("tests for correct class", {
       p <- RevoBenchmark(threads = c(1, 2), scale.factor = 0.05)
 
       expect_is(p, c("RevoBenchmark", "matrix"))

@@ -61,12 +61,20 @@ urbanekPerformance <- function(x){
 #' @export
 plot.RevoBenchmark <- function(x, theme_size=16, main = "Elapsed time in seconds", ...){
   dat <- to.data.frame(x)
-  minmax <- data.frame(
-    test = dat[, "test"],
-    min = apply(dat[, -1], 1, min),
-    max = apply(dat[, -1], 1, max)
-  )
-  # browser()
+  minmax <- if(ncol(dat) > 2){
+    data.frame(
+      test = dat[, "test"],
+      min = apply(dat[, -1], 1, min),
+      max = apply(dat[, -1], 1, max)
+    )
+  } else {
+    data.frame(
+      test = dat[, "test"],
+      min = dat[, -1],
+      max = dat[, -1]
+    )
+
+  }
   mdat <- reshape2::melt(dat, id.var = "test")
   ggplot2::ggplot(mdat, aes_string(x = "test")) +
     geom_linerange(data = minmax,
