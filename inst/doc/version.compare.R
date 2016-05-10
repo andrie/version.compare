@@ -4,7 +4,7 @@ library("knitr")
 scale.factor <- 1.0
 
 ## ----benchmark, echo=TRUE------------------------------------------------
-r <- findRscript(version = "3.2.4.*x64")
+r <- findRscript(version = "3.2.5.*x64")
 test.results <- RevoMultiBenchmark(rVersions = r, 
                                    threads = c(1, 4, 8), 
                                    scale.factor = scale.factor)
