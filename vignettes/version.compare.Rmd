@@ -24,7 +24,21 @@ scale.factor <- 1.0
 This vignette scales the test sets down to `r sprintf("%1.0f%%", 100*scale.factor)` of standard size, to speed up the process for sake of illustration. For a full-scale test, adjust the tests by setting `scale.factor <- 1`.
 
 ```{r benchmark, echo=TRUE}
-r <- findRscript(version = "3.2.5.*x64")
+
+r <- switch(Sys.info()[["sysname"]],
+            Linux = {
+              rscript <- findRscript()
+              
+              rv <- version.time(rscript, {
+                as.character(getRversion())
+              })
+              idx <- which(unlist(rv$results) == "3.3.1")
+              rscript[idx]
+              
+            },
+            Windows = findRscript(version = "3.3.1.*x64"
+            )
+)
 test.results <- RevoMultiBenchmark(rVersions = r, 
                                    threads = c(1, 4, 8), 
                                    scale.factor = scale.factor)

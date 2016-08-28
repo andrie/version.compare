@@ -4,7 +4,21 @@ library("knitr")
 scale.factor <- 1.0
 
 ## ----benchmark, echo=TRUE------------------------------------------------
-r <- findRscript(version = "3.2.5.*x64")
+
+r <- switch(Sys.info()[["sysname"]],
+            Linux = {
+              rscript <- findRscript()
+              
+              rv <- version.time(rscript, {
+                as.character(getRversion())
+              })
+              idx <- which(unlist(rv$results) == "3.3.1")
+              rscript[idx]
+              
+            },
+            Windows = findRscript(version = "3.3.1.*x64"
+            )
+)
 test.results <- RevoMultiBenchmark(rVersions = r, 
                                    threads = c(1, 4, 8), 
                                    scale.factor = scale.factor)
