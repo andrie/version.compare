@@ -29,7 +29,7 @@ findRinRegistry <- function(){
       unname(y[grep(".InstallPath", names(y))])
     } else NULL
   }
-  patterns <- c("SOFTWARE\\Revolution", "SOFTWARE\\R-core")
+  patterns <- c("SOFTWARE\\Microsoft", "SOFTWARE\\R-core")
   unique(unname(unlist(sapply(patterns, readOnce))))
 }
 

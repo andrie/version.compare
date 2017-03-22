@@ -32,11 +32,11 @@ r <- switch(Sys.info()[["sysname"]],
               rv <- version.time(rscript, {
                 as.character(getRversion())
               })
-              idx <- which(unlist(rv$results) == "3.3.1")
+              idx <- which(unlist(rv$results) == "3.3.3")
               rscript[idx]
               
             },
-            Windows = findRscript(version = "3.3.1.*x64"
+            Windows = findRscript(version = "*x64"
             )
 )
 test.results <- RevoMultiBenchmark(rVersions = r, 
@@ -58,7 +58,7 @@ plot(urbanekPerformance(test.results), theme_size = 8, main = "Relative Performa
 
 ## Elapsed time (seconds)
 
-The package  captures the total elapsed time for each of the benchmark tests. This makes it easey to compare the total elapsed time (in seconds).
+The package  captures the total elapsed time for each of the benchmark tests. This makes it easy to compare the total elapsed time (in seconds).
 
 
 ```{r compare-results, echo = FALSE, fig.width=6, fig.height=3, out.width="800px", dpi=1200, keep=TRUE}
