@@ -1,6 +1,6 @@
 Package: version.compare
 Title: Compares the Results of Running Code in Different Installed Versions of R
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: "Andrie de Vries <adevries@microsoft.com> [aut, cre]"
 Date: 2017-03-22
 Description: Allows you to run R code in different versions of R and compare
