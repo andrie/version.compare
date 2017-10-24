@@ -12,11 +12,11 @@ r <- switch(Sys.info()[["sysname"]],
               rv <- version.time(rscript, {
                 as.character(getRversion())
               })
-              idx <- which(unlist(rv$results) == "3.3.3")
+              idx <- which(unlist(rv$results) == "3.4.1")
               rscript[idx]
               
             },
-            Windows = findRscript(version = "*x64"
+            Windows = findRscript(version = "3.4.1.*x64"
             )
 )
 test.results <- RevoMultiBenchmark(rVersions = r, 

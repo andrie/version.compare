@@ -74,7 +74,7 @@ findRscript <- function(path, executable = "(Rscript$|Rscript.exe)", pattern, ve
   }
 
   ret <- lapply(path, foo, executable=executable, recursive=TRUE)
-  ret <- unname(unlist(ret))
+  ret <- unique(unname(unlist(ret)))
   if(!missing("version") && !is.null(version)) ret <- ret[grepl(version, ret)]
   normalizePath(ret)
 }
