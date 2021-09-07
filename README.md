@@ -32,11 +32,11 @@ rscript <- findRscript()
 rscript <- switch(
   Sys.info()[["sysname"]],
   Windows = c(
-    "c:/program files/RRO/R-3.1.1/bin/x64/Rscript.exe",
-    "c:/program files/R/R-3.1.1/bin/x64/Rscript.exe"
+    "c:/program files/RRO/R-4.0.2/bin/x64/Rscript.exe",
+    "c:/program files/R/R-4.0.2/bin/x64/Rscript.exe"
   ),
   Linux = c(
-    "/usr/lib64/RRO-8.0/R-3.1.1/lib/R/bin/Rscript",
+    "/usr/lib64/RRO-8.0/R-4.0.2/lib/R/bin/Rscript",
     "/usr/lib/R/bin/Rscript"
   )
 )
